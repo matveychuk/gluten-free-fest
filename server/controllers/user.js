@@ -2,7 +2,6 @@ const Users = require("../models/user");
 const Mailer = require("../utils/mailer");
 
 registerUser = async (req, res) => {
-  console.log('req', req)
   const body = req.body;
 
   if (!body) {
@@ -18,6 +17,8 @@ registerUser = async (req, res) => {
   const isUserExist = await Users.findOne({
     $and: [{ email }, { event }],
   });
+
+  console.log("isUserExist", isUserExist);
 
   if (isUserExist)
     return res.status(200).json({
@@ -76,19 +77,19 @@ getUsersList = async (req, res) => {
 };
 
 sendReminder = async (req, res) => {
-  console.log('req', req.body)
+  console.log("req", req.body);
   const body = req.body;
-  if (!req.body.length) return
+  if (!req.body.length) return;
 
   Mailer.sendReminder(body);
 
   return res.status(201).json({
-    success: true
+    success: true,
   });
 };
 
 module.exports = {
   registerUser,
   getUsersList,
-  sendReminder
+  sendReminder,
 };

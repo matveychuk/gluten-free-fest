@@ -1,26 +1,23 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import { HashRouter, Switch, Route } from "react-router-dom";
-
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Welcome from "./screens/Welcome";
 import Info from "./screens/Info";
-import UsersList from "./screens/UsersList";
-import AddCompany from "./screens/AddCompany";
 import Registration from "./screens/Registration";
+import Dashboard from "./screens/Dashboard";
 import useIsUserRegistered from "./hooks/useIsUserRegistered";
 import UserContext from "./contexts/UserContext";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#b2332e",
+      main: "#ed3528",
     },
     secondary: {
-      main: "#728b48",
+      main: "#b6e43b",
     },
   },
 });
@@ -42,13 +39,11 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/" component={Welcome} />
-              <Route exact path="/*" component={Welcome} />
-              {/* <Route path="/info">
+              <Route path="/info">
                 {isUserRegistered ? <Info /> : <Registration />}
               </Route>
               <Route path="/registration" component={Registration} />
-              <Route path="/admin/events/:eventName" component={UsersList} />
-              <Route path="/admin/addCompany" component={AddCompany} /> */}
+              <Route path="/admin" component={Dashboard} />
             </Switch>
           </Router>
         </div>

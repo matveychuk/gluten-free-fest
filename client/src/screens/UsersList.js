@@ -7,8 +7,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -124,7 +122,7 @@ export default function UsersList() {
   };
   return (
     <>
-      <Typography
+      {/* <Typography
         component="h1"
         variant="h4"
         align="center"
@@ -132,91 +130,91 @@ export default function UsersList() {
         style={{ fontStyle: "italic", padding: 30 }}
       >
         Список зареєстрованих учасників
-      </Typography>
-      <Grid item xs={12}>
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead padding="checkbox">
-              <TableRow>
-                <StyledTableCell padding="checkbox">
-                  <Checkbox
-                    indeterminate={numSelected > 0 && numSelected < rowCount}
-                    checked={rowCount > 0 && numSelected === rowCount}
-                    onChange={handleSelectAllClick}
-                    inputProps={{ "aria-label": "select all desserts" }}
-                  />
-                </StyledTableCell>
-                {headCells.map((headCell) => (
-                  <StyledTableCell
-                    key={headCell.id}
-                    align="center"
-                    sortDirection={orderBy === headCell.id ? order : false}
+      </Typography> */}
+
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead padding="checkbox">
+            <TableRow>
+              <StyledTableCell padding="checkbox">
+                <Checkbox
+                  indeterminate={numSelected > 0 && numSelected < rowCount}
+                  checked={rowCount > 0 && numSelected === rowCount}
+                  onChange={handleSelectAllClick}
+                  inputProps={{ "aria-label": "select all desserts" }}
+                />
+              </StyledTableCell>
+              {headCells.map((headCell) => (
+                <StyledTableCell
+                  key={headCell.id}
+                  align="center"
+                  sortDirection={orderBy === headCell.id ? order : false}
+                >
+                  <TableSortLabel
+                    active={orderBy === headCell.id}
+                    direction={orderBy === headCell.id ? order : "asc"}
+                    onClick={createSortHandler(headCell.id)}
                   >
-                    <TableSortLabel
-                      active={orderBy === headCell.id}
-                      direction={orderBy === headCell.id ? order : "asc"}
-                      onClick={createSortHandler(headCell.id)}
+                    {headCell.label}
+                    {headCell.sortable && orderBy === headCell.id ? (
+                      <span className={classes.visuallyHidden}>
+                        {order === "desc"
+                          ? "sorted descending"
+                          : "sorted ascending"}
+                      </span>
+                    ) : null}
+                  </TableSortLabel>
+                </StyledTableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {!!users.length &&
+              stableSort(users, getComparator(order, orderBy)).map(
+                (row, index) => {
+                  const isItemSelected = isSelected(row.email);
+                  const labelId = `enhanced-table-checkbox-${index}`;
+                  return (
+                    <StyledTableRow
+                      hover
+                      onClick={(event) => handleClick(event, row.email)}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={row.email}
+                      selected={isItemSelected}
                     >
-                      {headCell.label}
-                      {headCell.sortable && orderBy === headCell.id ? (
-                        <span className={classes.visuallyHidden}>
-                          {order === "desc"
-                            ? "sorted descending"
-                            : "sorted ascending"}
-                        </span>
-                      ) : null}
-                    </TableSortLabel>
-                  </StyledTableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {!!users.length &&
-                stableSort(users, getComparator(order, orderBy)).map(
-                  (row, index) => {
-                    const isItemSelected = isSelected(row.email);
-                    const labelId = `enhanced-table-checkbox-${index}`;
-                    return (
-                      <StyledTableRow
-                        hover
-                        onClick={(event) => handleClick(event, row.email)}
-                        role="checkbox"
-                        aria-checked={isItemSelected}
-                        tabIndex={-1}
-                        key={row.email}
-                        selected={isItemSelected}
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          checked={isItemSelected}
+                          inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
                       >
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            checked={isItemSelected}
-                            inputProps={{ "aria-labelledby": labelId }}
-                          />
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          id={labelId}
-                          scope="row"
-                          padding="none"
-                        >
-                          {row.lastName}
-                        </TableCell>
-                        <TableCell align="center">{row.firstName}</TableCell>
-                        <TableCell align="center">{row.email}</TableCell>
-                        <TableCell align="center">{row.phone}</TableCell>
-                        <TableCell align="center">
-                          {row.subscribe ? "+" : "-"}
-                        </TableCell>
-                        <TableCell align="center">
-                          {row.member ? "+" : "-"}
-                        </TableCell>
-                      </StyledTableRow>
-                    );
-                  }
-                )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
+                        {row.lastName}
+                      </TableCell>
+                      <TableCell align="center">{row.firstName}</TableCell>
+                      <TableCell align="center">{row.email}</TableCell>
+                      <TableCell align="center">{row.phone}</TableCell>
+                      <TableCell align="center">
+                        {row.subscribe ? "+" : "-"}
+                      </TableCell>
+                      <TableCell align="center">
+                        {row.member ? "+" : "-"}
+                      </TableCell>
+                    </StyledTableRow>
+                  );
+                }
+              )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
       <Button
         // fullWidth
         variant="contained"

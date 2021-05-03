@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
-import MerryChristmasImage from "../assets/tree.png";
+import bgImage from "../assets/bgCeliacDay.JPG";
 import { grey } from "@material-ui/core/colors";
 import UserContext from "../contexts/UserContext";
 
@@ -21,7 +20,6 @@ import config from "../config";
 import axios from "axios";
 
 export default function Registration() {
-  let history = useHistory();
   const { isUserRegistered, updateUserRegistration } = useContext(UserContext);
   const classes = useStyles();
 
@@ -31,9 +29,9 @@ export default function Registration() {
     email: "",
     phone: "",
     subscribe: false,
-    event: "newyearfest",
+    event: "celiac_day2021",
     member: false,
-    expiredAt: new Date("2020-12-22"),
+    expiredAt: new Date("2021-05-23"),
   });
 
   const [error, setError] = useState({
@@ -95,7 +93,7 @@ export default function Registration() {
           elevation={6}
           square
           style={{
-            backgroundColor: grey[200],
+            backgroundColor: grey[100],
             display: "flex",
             alignItems: "center",
           }}
@@ -112,8 +110,16 @@ export default function Registration() {
                 variant="h1"
                 className={classes.message}
               >
-                Реєстрація пройшла успішно. Ярмарок відкрито!
+                Реєстрація пройшла успішно. Ярмарок буде відкрито 15-го травня,
+                про що Ви будете додатково сповіщені на електронну пошту!
               </Typography>
+              {/* <Typography
+                component="h1"
+                variant="h1"
+                className={classes.message}
+              >
+                Реєстрація пройшла успішно. Ярмарок відкрито!
+              </Typography> */}
               <Typography
                 component="h3"
                 variant="h6"
@@ -123,7 +129,7 @@ export default function Registration() {
                 неотримання листа перевірте папку Спам
               </Typography>
 
-              <Button
+              {/* <Button
                 onClick={() => history.push("/info")}
                 fullWidth
                 variant="contained"
@@ -131,7 +137,7 @@ export default function Registration() {
                 className={classes.submit}
               >
                 Перейти до ярмарку
-              </Button> 
+              </Button> */}
             </Container>
           )}
           {!sending && !isUserRegistered && (
@@ -256,13 +262,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#f5f2f3",
   },
   image: {
-    backgroundImage: `url(${MerryChristmasImage})`,
+    backgroundImage: `url(${bgImage})`,
     backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "light"
-        ? theme.palette.grey[50]
-        : theme.palette.grey[900],
-    backgroundSize: "cover",
+    backgroundColor: "white",
+    backgroundSize: "contain",
     backgroundPosition: "center",
   },
   paper: {
@@ -328,7 +331,7 @@ const useStyles = makeStyles((theme) => ({
   },
   loaderContainer: {
     display: "flex",
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
+    justifyContent: "center",
+    alignItems: "center",
+  },
 }));

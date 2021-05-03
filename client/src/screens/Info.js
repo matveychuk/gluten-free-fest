@@ -9,10 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
-// import { companies } from "../data/companies";
-import { trimText } from "../utils/trimText";
 import { grey } from "@material-ui/core/colors";
-import bgImage from "../assets/bg.png";
+import bgImage from "../assets/cart.jpg";
 import asparagus from "../assets/asparagus.jpg";
 import ginger from "../assets/ginger.jpg";
 import vitaminka from "../assets/vitaminka.jpg";
@@ -68,12 +66,12 @@ export default function Info() {
           backgroundColor: "#3d3839",
           backgroundImage: `url(${bgImage})`,
           backgroundRepeat: "repeat",
-          backgroundSize: "contain",
+          backgroundSize: "40%",
           flex: 1,
         }}
       >
         <div className={classes.heroContent}>
-          <Container maxWidth="md">
+          <Container maxWidth="lg">
             <Typography
               component="h1"
               variant="h4"
@@ -82,61 +80,62 @@ export default function Info() {
               gutterBottom
               style={{ color: "white" }}
             >
-              Вітаємо на Першому в Україні online ярмарку безглютенової (Gluten
-              free) продукції!
+              Вітаємо на online ярмарку безглютенової (Gluten free) продукції!
             </Typography>
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="lg">
           <Grid container spacing={4}>
             {!!companies.length &&
-              companies.map((company, index) => (
-                <Grid item key={index} xs={12} sm={6} md={4}>
-                  <Card
-                    className={classes.card}
-                    style={{ backgroundColor: grey[200] }}
-                  >
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image={getCompanyImage(company)}
-                      title="Image title"
-                    />
-                    <CardContent className={classes.cardContent}>
-                      <Typography
-                        className={classes.name}
-                        gutterBottom
-                        variant="h5"
-                        component="h2"
-                      >
-                        {company.name}
-                      </Typography>
-                      <Typography>
-                        {/* {trimText(company.description, 300)} */}
-                        {company.description}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button
-                        size="small"
-                        variant="contained"
-                        color="secondary"
-                      >
-                        <Link
-                          color="inherit"
-                          href={company.url}
-                          target="_blank"
-                          style={{ color: "white" }}
+              companies.map((company, index) =>
+                company.show ? (
+                  <Grid item key={index} xs={12} sm={6} md={4}>
+                    <Card
+                      className={classes.card}
+                      style={{ backgroundColor: grey[100] }}
+                    >
+                      <CardMedia
+                        className={classes.cardMedia}
+                        image={getCompanyImage(company)}
+                        title="Image title"
+                      />
+                      <CardContent className={classes.cardContent}>
+                        <Typography
+                          className={classes.name}
+                          gutterBottom
+                          variant="h5"
+                          component="h2"
                         >
-                          Перейти на сайт
-                        </Link>
-                      </Button>
-                      {/* <Button size="small" color="secondary">
+                          {company.name}
+                        </Typography>
+                        <Typography className={classes.description}>
+                          {/* {trimText(company.description, 300)} */}
+                          {company.description}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button
+                          size="small"
+                          variant="contained"
+                          color="secondary"
+                        >
+                          <Link
+                            color="inherit"
+                            href={company.url}
+                            target="_blank"
+                            style={{ color: "white" }}
+                          >
+                            Перейти на сайт
+                          </Link>
+                        </Button>
+                        {/* <Button size="small" color="secondary">
                       Більше інфо
                     </Button> */}
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ) : null
+              )}
           </Grid>
         </Container>
       </main>
@@ -186,6 +185,9 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 1,
+  },
+  description: {
+    fontSize: "0.750rem",
   },
   footer: {
     backgroundColor: theme.palette.secondary.main,

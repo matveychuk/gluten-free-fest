@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,6 +14,7 @@ import axios from "axios";
 
 export default function SignIn() {
   const classes = useStyles();
+  const { companyId } = useParams();
 
   const initialData = {
     name: "",
@@ -21,6 +23,18 @@ export default function SignIn() {
     imageUrl: "",
   };
   const [data, setData] = useState(initialData);
+
+  useEffect(() => {
+    if (companyId) {
+      console.log("companyId", companyId);
+      axios
+        .get(config.api + "/admin/companies/" + companyId)
+        .then((res) => {
+          setData(res.data.company);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [companyId]);
 
   const [error, setError] = useState({
     name: false,
@@ -58,6 +72,7 @@ export default function SignIn() {
       .catch((err) => console.log(err));
   };
 
+  console.log("data", data);
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

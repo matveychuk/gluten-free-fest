@@ -3,7 +3,7 @@ const Events = require("../models/event");
 const Mailer = require("../utils/mailer");
 
 addCompany = async (req, res) => {
-  // console.log('req', req)
+  console.log("req", req.body);
   const body = req.body;
 
   if (!body) {
@@ -14,28 +14,33 @@ addCompany = async (req, res) => {
   }
 
   const isCompanyExist = await Companies.findOne({
-    name: body.name,
+    _id: body._id,
   });
 
-  if (isCompanyExist)
+  if (isCompanyExist) {
+    await Companies.findOneAndUpdate(
+      { _id: body._id },
+      {
+        $set: {
+          name: body.name,
+          description: body.description,
+          imageUrl: body.imageUrl,
+          url: body.url,
+          updatedAt: new Date(),
+        },
+      }
+    );
+
     return res.status(200).json({
       success: true,
       message: "Company already exist",
     });
+  }
 
   //create new user and save it to db
   const company = new Companies(body);
 
   console.log("company created", company);
-
-  if (body.event) {
-    await Events.findOneAndUpdate(
-      { name: body.event },
-      {
-        $addToSet: { companies: company.id },
-      }
-    );
-  }
 
   if (!company) {
     return res.status(400).json({
@@ -62,6 +67,37 @@ addCompany = async (req, res) => {
     });
 };
 
+showCompany = async (req, res) => {
+  // console.log('req', req)
+  const body = req.body;
+
+  if (!body) {
+    return res.status(400).json({
+      success: false,
+      error: "No data provided",
+    });
+  }
+
+  const isCompanyExist = await Companies.findOne({
+    _id: body.id,
+  });
+
+  console.log("isCompanyExist", isCompanyExist);
+
+  if (isCompanyExist)
+    await Companies.findOneAndUpdate(
+      { _id: body.id },
+      {
+        $set: { show: body.show },
+      }
+    );
+
+  return res.status(200).json({
+    success: true,
+    message: "Company data updated",
+  });
+};
+
 getCompanies = async (req, res) => {
   const companies = await Companies.find();
 
@@ -77,7 +113,33 @@ getCompanies = async (req, res) => {
   });
 };
 
+getCompany = async (req, res) => {
+  const body = req.body;
+  const { companyId } = req.params;
+  if (!companyId) {
+    return res.status(400).json({
+      success: false,
+      error: "No company provided",
+    });
+  }
+
+  const company = await Companies.findOne({ _id: companyId });
+
+  if (company)
+    return res.status(200).json({
+      success: true,
+      company,
+    });
+
+  return res.status(400).json({
+    success: false,
+    error: "no data",
+  });
+};
+
 module.exports = {
   addCompany,
   getCompanies,
+  showCompany,
+  getCompany,
 };
