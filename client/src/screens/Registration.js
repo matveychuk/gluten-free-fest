@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -22,6 +23,7 @@ import axios from "axios";
 export default function Registration() {
   const { isUserRegistered, updateUserRegistration } = useContext(UserContext);
   const classes = useStyles();
+  const history = useHistory();
 
   const [data, setData] = useState({
     firstName: "",
@@ -105,7 +107,7 @@ export default function Registration() {
           )}
           {!sending && isUserRegistered && (
             <Container maxWidth="md">
-              <Typography
+              {/* <Typography
                 component="h1"
                 variant="h1"
                 className={classes.message}
@@ -113,32 +115,24 @@ export default function Registration() {
                 Реєстрація пройшла успішно. Ваш промокод на знижку CELIAC.
                 Ярмарок буде відкрито 15-го травня, про що Ви будете додатково
                 сповіщені на електронну пошту!
-              </Typography>
-              {/* <Typography
+              </Typography> */}
+              <Typography
                 component="h1"
                 variant="h1"
                 className={classes.message}
               >
                 Реєстрація пройшла успішно. Ярмарок відкрито!
-              </Typography> */}
-              <Typography
-                component="h3"
-                variant="h6"
-                className={classes.confirmation}
-              >
-                Промокод було надіслано на Вашу електронну пошту. У разі
-                неотримання листа перевірте папку Спам
               </Typography>
 
-              {/* <Button
+              <Button
                 onClick={() => history.push("/info")}
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="secondary"
                 className={classes.submit}
               >
                 Перейти до ярмарку
-              </Button> */}
+              </Button>
             </Container>
           )}
           {!sending && !isUserRegistered && (

@@ -12,8 +12,11 @@ import Link from "@material-ui/core/Link";
 import { grey } from "@material-ui/core/colors";
 import bgImage from "../assets/cart.jpg";
 import asparagus from "../assets/asparagus.jpg";
-import ginger from "../assets/ginger.jpg";
-import vitaminka from "../assets/vitaminka.jpg";
+import ginger from "../assets/gingerAndWhite.jpg";
+import vitaminka from "../assets/vitamins.jpg";
+import norimazka from "../assets/norimazka.jpg";
+import chips from "../assets/chips.jpg";
+import scvira from "../assets/scvira.jpg";
 
 import config from "../config";
 import axios from "axios";
@@ -44,6 +47,12 @@ export default function Info() {
         return vitaminka;
       case "ТМ 'Ginger and White'":
         return ginger;
+      case "ТМ Сквирянка":
+        return scvira;
+      case "NoriMazka":
+        return norimazka;
+      case "Toni Cocos":
+        return chips;
       default:
         return company.imageUrl;
     }
