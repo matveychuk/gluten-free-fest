@@ -40,7 +40,11 @@ registerUser = async (req, res) => {
     .save()
     .then(() => {
       console.log("from then");
-      Mailer.sendPromoCode(body.firstName, body.email, res);
+      Mailer.sendPromoCode(body.firstName, body.email);
+      return res.status(201).json({
+        success: true,
+        message: "User saved",
+      });
     })
     .catch((error) => {
       return res.status(400).json({
