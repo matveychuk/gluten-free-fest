@@ -38,26 +38,23 @@ export default function Welcome() {
             direction="column"
             justify="space-between"
           >
-            <Typography component="h1" variant="h4" align="center" gutterBottom>
+            {/* <Typography component="h1" variant="h4" align="center" gutterBottom>
               Вітаємо на традиційному online-ярмарку безглютенової продукції!
+            </Typography> */}
+            <Typography component="h1" variant="h3" align="center" gutterBottom>
+              Ярмарок зачинився!
+            </Typography>
+            <Typography variant="h6" align="left" paragraph>
+              До зустрічі на наступних ярмарках. Чекайте анонсу на сторінці{" "}
+              <a
+                href="https://www.facebook.com/Gluten-Free-Fest-101297068519846/"
+                target="_blank"
+              >
+                facebook
+              </a>
+              .
             </Typography>
             {/* <Typography
-                component="h1"
-                variant="h3"
-                align="center"
-                gutterBottom
-              >
-                Ярмарок зачинився!
-              </Typography>
-              <Typography
-                variant="h6"
-                align="left"
-                paragraph
-              >
-                До зустрічі на наступному ярмарку у травні 2021р. Чекайте анонсу на сторінці {' '}
-                <a href="https://www.facebook.com/Gluten-Free-Fest-101297068519846/" target='_blank'>facebook</a>.
-              </Typography> */}
-            <Typography
               variant="body1"
               align="left"
               paragraph
@@ -140,25 +137,27 @@ export default function Welcome() {
             >
               Приєднуйтесь! Даруйте радість собі та близьким завдяки якісним і
               безпечним продуктам!
-            </Typography>
-            <Typography
-              variant="body1"
-              align="left"
-              paragraph
-              className={classes.text}
-            >
-              З повагою та побажанням здоров’я,
-            </Typography>
-            <Typography
-              variant="body1"
-              align="left"
-              paragraph
-              className={classes.text}
-            >
-              Українська спілка целіакії
-            </Typography>
+            </Typography> */}
+            <div>
+              <Typography
+                variant="body1"
+                align="left"
+                paragraph
+                className={classes.text}
+              >
+                З повагою та побажанням здоров’я,
+              </Typography>
+              <Typography
+                variant="body1"
+                align="left"
+                paragraph
+                className={classes.text}
+              >
+                Українська спілка целіакії
+              </Typography>
+            </div>
 
-            <Button
+            {/* <Button
               fullWidth
               variant="contained"
               color="secondary"
@@ -166,7 +165,7 @@ export default function Welcome() {
               onClick={goToRegistration}
             >
               Перейти до реєстрації
-            </Button>
+            </Button> */}
           </Grid>
         </Grid>
       </Grid>

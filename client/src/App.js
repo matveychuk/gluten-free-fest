@@ -38,11 +38,12 @@ function App() {
         <div className={classes.app}>
           <Router>
             <Switch>
-              <Route exact path="/" component={Welcome} />
+              <Route exact path="*" component={Welcome} />
+              {/* <Route exact path="/" component={Welcome} />
               <Route path="/info">
                 {isUserRegistered ? <Info /> : <Registration />}
               </Route>
-              <Route path="/registration" component={Registration} />
+              <Route path="/registration" component={Registration} /> */}
               <Route path="/admin" component={Dashboard} />
             </Switch>
           </Router>
