@@ -1,6 +1,6 @@
 const config = {
   // api: "http://localhost:4000",
-  api: "https://gf-server-may2021.herokuapp.com",
+  api: "https://fierce-brook-46941.herokuapp.com",
 };
 
 export default config;

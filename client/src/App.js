@@ -1,8 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider, createTheme, makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { makeStyles } from "@material-ui/core/styles";
 
 import Welcome from "./screens/Welcome";
 import Info from "./screens/Info";
@@ -11,13 +10,13 @@ import Dashboard from "./screens/Dashboard";
 import useIsUserRegistered from "./hooks/useIsUserRegistered";
 import UserContext from "./contexts/UserContext";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
-      main: "#ed3528",
+      main: "#0c9e99",
     },
     secondary: {
-      main: "#b6e43b",
+      main: "#fd655a",
     },
   },
 });
@@ -37,15 +36,13 @@ function App() {
         <CssBaseline />
         <div className={classes.app}>
           <Router>
-            <Switch>
-              <Route exact path="*" component={Welcome} />
-              {/* <Route exact path="/" component={Welcome} />
-              <Route path="/info">
-                {isUserRegistered ? <Info /> : <Registration />}
-              </Route>
-              <Route path="/registration" component={Registration} /> */}
-              <Route path="/admin" component={Dashboard} />
-            </Switch>
+            <Routes>
+              {/* <Route exact path="*" component={Welcome} /> */}
+              <Route exact path="/" element={<Welcome />} />
+              <Route path="/info" element={isUserRegistered ? <Info /> : <Registration />} />
+              <Route path="/registration" element={<Registration />} />
+              <Route path="/admin" element={<Dashboard />} />
+            </Routes>
           </Router>
         </div>
       </UserContext.Provider>
