@@ -13,10 +13,12 @@ import { grey } from "@material-ui/core/colors";
 import bgImage from "../assets/cart.jpg";
 import asparagus from "../assets/asparagus.jpg";
 import ginger from "../assets/gingerAndWhite.jpg";
-import vitaminka from "../assets/vitamins.jpg";
+import vitaminka from "../assets/vitaminka2021.jpg";
 import norimazka from "../assets/norimazka.jpg";
 import chips from "../assets/chips.jpg";
 import scvira from "../assets/scvira.jpg";
+import niglutenu from "../assets/niglutenu.jpg";
+import savin from "../assets/savin.jpg";
 
 import config from "../config";
 import axios from "axios";
@@ -53,6 +55,10 @@ export default function Info() {
         return norimazka;
       case "Toni Cocos":
         return chips;
+      case "NiGlutenu інтернет-магазин":
+        return niglutenu;
+      case "Savin Product":
+        return savin;
       default:
         return company.imageUrl;
     }
@@ -99,22 +105,10 @@ export default function Info() {
               companies.map((company, index) =>
                 company.show ? (
                   <Grid item key={index} xs={12} sm={6} md={4}>
-                    <Card
-                      className={classes.card}
-                      style={{ backgroundColor: grey[100] }}
-                    >
-                      <CardMedia
-                        className={classes.cardMedia}
-                        image={getCompanyImage(company)}
-                        title="Image title"
-                      />
+                    <Card className={classes.card} style={{ backgroundColor: grey[100] }}>
+                      <CardMedia className={classes.cardMedia} image={getCompanyImage(company)} title="Image title" />
                       <CardContent className={classes.cardContent}>
-                        <Typography
-                          className={classes.name}
-                          gutterBottom
-                          variant="h5"
-                          component="h2"
-                        >
+                        <Typography className={classes.name} gutterBottom variant="h5" component="h2">
                           {company.name}
                         </Typography>
                         <Typography className={classes.description}>
@@ -123,23 +117,23 @@ export default function Info() {
                         </Typography>
                       </CardContent>
                       <CardActions>
-                        <Button
-                          size="small"
-                          variant="contained"
-                          color="secondary"
-                        >
-                          <Link
-                            color="inherit"
-                            href={company.url}
-                            target="_blank"
-                            style={{ color: "white" }}
-                          >
+                        {company.name === "TM “Good Line”" && (
+                          <Button size="small" variant="contained" color="primary">
+                            <Link
+                              color="inherit"
+                              href="https://docs.google.com/forms/d/e/1FAIpQLSe-pQ4BdQ22DNO8MxI_5yYKRia8kHCQ24HO57QtdAdnvb1Pjg/viewform"
+                              target="_blank"
+                              style={{ color: "white" }}
+                            >
+                              Оформити замовлення
+                            </Link>
+                          </Button>
+                        )}
+                        <Button size="small" variant="contained" color="secondary">
+                          <Link color="inherit" href={company.url} target="_blank" style={{ color: "white" }}>
                             Перейти на сайт
                           </Link>
                         </Button>
-                        {/* <Button size="small" color="secondary">
-                      Більше інфо
-                    </Button> */}
                       </CardActions>
                     </Card>
                   </Grid>

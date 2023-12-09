@@ -14,7 +14,7 @@ const MainListItems = () => {
   const classes = useStyles();
   return (
     <div>
-      <Link to="/admin/events/celiac_day2021" className={classes.link}>
+      <Link to="/admin/events/new_yaer_2024" className={classes.link}>
         <ListItem button>
           <ListItemIcon>
             <PeopleIcon />
